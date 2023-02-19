@@ -61,7 +61,7 @@ namespace Gym_Management_System
                     }
                 }
 
-                cmd = new SqlCommand("select * from TblMembers where memberid = @id", con);
+                cmd = new SqlCommand("select TblMembers.memberid as memberid,TblMemberPlan.mon as mon,TblMemberPlan.tues as tues,TblMemberPlan.wed as wed,TblMemberPlan.thu as thu,TblMemberPlan.fri as fri,TblMemberPlan.satu as satu,TblMemberPlan.sun as sun,TblMembers.doj as doj,TblMembers.expiredate as expiredate,TblMemberPlan.fromtime as fromtime,TblMemberPlan.totime as totime  from TblMembers INNER JOIN TblMemberPlan ON TblMemberPlan.memberid = TblMembers.memberid  AND TblMembers.memberid = @id", con);
 
                 cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Session["MemberId"]));
 

@@ -31,7 +31,7 @@ namespace Gym_Management_System
         {
             con.Open();
 
-            SqlDataAdapter da = new SqlDataAdapter("select *,CONVERT(VARCHAR(10), dob, 105) as d from TblMembers where memberid in (select memberid from TblTrainerAllocation where trainerid = "+Convert.ToInt32(Session["TrainerId"])+")", con);
+            SqlDataAdapter da = new SqlDataAdapter("select *,CONVERT(VARCHAR(10), dob, 105) as d from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND TblMeasurements.memberid in (select memberid from TblTrainerAllocation where TblTrainerAllocation.trainerid = " + Convert.ToInt32(Session["TrainerId"])+")", con);
 
             DataTable dt = new DataTable();
 

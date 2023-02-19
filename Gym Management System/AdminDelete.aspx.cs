@@ -65,17 +65,20 @@ namespace Gym_Management_System
 
                     cmd.ExecuteNonQuery();
 
+                    cmd = new SqlCommand("delete from TblMemberPlan where memberid = @id", con);
+
+
+                    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
+
+                    cmd.ExecuteNonQuery();
+
                     cmd = new SqlCommand("delete from TblMembers where memberid = @id",con);
                     
                     cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
 
                     cmd.ExecuteNonQuery();
 
-                    cmd = new SqlCommand("delete from TblTrainerAllocation where memberid = @mid", con);
 
-                    cmd.Parameters.AddWithValue("@mid", Convert.ToInt32(Request.QueryString["id"]));
-
-                    cmd.ExecuteNonQuery();
 
                     Response.Write("<script>alert('Member Deleted Successfully..')</script>");
 
@@ -84,18 +87,19 @@ namespace Gym_Management_System
                 }
                 else if (Request.QueryString["type"].ToString() == "Trainer" && Request.QueryString["id"] != null)
                 {
-                  
+                    cmd = new SqlCommand("delete from TblTrainerAllocation where trainerid = @tid", con);
+
+                    cmd.Parameters.AddWithValue("@tid", Convert.ToInt32(Request.QueryString["id"]));
+
+                    cmd.ExecuteNonQuery();
+
                     cmd = new SqlCommand("delete from TblTrainers where trainerid = @id",con);
                     
                     cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
 
                     cmd.ExecuteNonQuery();
 
-                    cmd = new SqlCommand("delete from TblTrainerAllocation where trainer = @tid", con);
-
-                    cmd.Parameters.AddWithValue("@tid", Convert.ToInt32(Request.QueryString["id"]));
-
-                    cmd.ExecuteNonQuery();
+                    
 
                     Response.Write("<script>alert('Trainer Deleted Successfully..')</script>");
 

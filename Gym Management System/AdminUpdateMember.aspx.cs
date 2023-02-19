@@ -66,7 +66,7 @@ namespace Gym_Management_System
 
                 con.Open();
 
-                cmd = new SqlCommand("select * from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND TblMembers.memberid = @id", con);
+                cmd = new SqlCommand("select * from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND TblMembers.memberid = @id INNER JOIN TblMemberPlan ON TblMembers.memberid = TblMemberPlan.memberid", con);
 
                 cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
 
@@ -123,11 +123,11 @@ namespace Gym_Management_System
 
             if (txtPass.Text == "")
             {
-                cmd = new SqlCommand("update TblMembers set name=@name, address=@address, contactno=@contactno, gender=@gender, email=@email, city=@city, state=@state, height=@height, weight=@weight, month=@month, onemonthfee=@onemonthfee, totalfee=@totalfee, receivedfee=@receivedfee, fromtime=@fromtime, totime=@totime where memberid = @id", con);
+                cmd = new SqlCommand("update TblMembers set name=@name, address=@address, contactno=@contactno, gender=@gender, email=@email, city=@city, state=@state, month=@month, onemonthfee=@onemonthfee, totalfee=@totalfee, receivedfee=@receivedfee where memberid = @id", con);
             }
             else
             {
-                cmd = new SqlCommand("update TblMembers set name=@name, address=@address, contactno=@contactno, gender=@gender, email=@email, city=@city, state=@state, height=@height, weight=@weight,month=@month, onemonthfee=@onemonthfee, totalfee=@totalfee, receivedfee=@receivedfee, password=@password, fromtime=@fromtime, totime=@totime where memberid = @id", con);
+                cmd = new SqlCommand("update TblMembers set name=@name, address=@address, contactno=@contactno, gender=@gender, email=@email, city=@city, state=@state,month=@month, onemonthfee=@onemonthfee, totalfee=@totalfee, receivedfee=@receivedfee, password=@password where memberid = @id", con);
                 cmd.Parameters.AddWithValue("@password",encryption(txtPass.Text));
             }
 
@@ -139,14 +139,14 @@ namespace Gym_Management_System
             cmd.Parameters.AddWithValue("@email", txtEmail.Text);
             cmd.Parameters.AddWithValue("@city", txtCity.Text);
             cmd.Parameters.AddWithValue("@state", txtState.Text);
-            cmd.Parameters.AddWithValue("@height", Convert.ToDecimal(txtHeight.Text));
-            cmd.Parameters.AddWithValue("@weight", Convert.ToDecimal(txtWeight.Text));
+            // cmd.Parameters.AddWithValue("@height", Convert.ToDecimal(txtHeight.Text));
+            // cmd.Parameters.AddWithValue("@weight", Convert.ToDecimal(txtWeight.Text));
             cmd.Parameters.AddWithValue("@month", Convert.ToInt32(txtMonth.Text));
             cmd.Parameters.AddWithValue("@onemonthfee", Convert.ToInt32(txtOneMonthFee.Text));
             cmd.Parameters.AddWithValue("@totalfee", Convert.ToInt32(txtTotalFee.Text));
             cmd.Parameters.AddWithValue("@receivedfee", Convert.ToInt32(txtReceivedFee.Text));
-            cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
-            cmd.Parameters.AddWithValue("@totime", txtTo.Text);
+           // cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
+            //cmd.Parameters.AddWithValue("@totime", txtTo.Text);
            // cmd.Parameters.AddWithValue("@expiredate", Convert.ToDateTime(txtDOJ.Text).AddMonths(Convert.ToInt32(txtMonth.Text)).ToShortDateString());
             cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
 
@@ -181,6 +181,36 @@ namespace Gym_Management_System
                 cmd.Parameters.AddWithValue("@height", Convert.ToInt32(txtHeight.Text));
                 cmd.Parameters.AddWithValue("@weight", Convert.ToInt32(txtWeight.Text));
                 cmd.Parameters.AddWithValue("@BMI", Convert.ToInt32(txtBMI.Text));
+                cmd.ExecuteNonQuery();
+            }
+
+
+            cmd = new SqlCommand("select * from TblMemberPlan where memberid = @id", con);
+
+            cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
+
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd);
+
+            DataTable dt1 = new DataTable();
+
+            da1.Fill(dt1);
+
+            if (dt1.Rows.Count == 1)
+            {
+                cmd = new SqlCommand("update TblMemberPlan set fromtime=@fromtime, totime=@totime where memberid = @id", con);
+                cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
+                cmd.Parameters.AddWithValue("@totime", txtTo.Text);
+                cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
+
+                cmd.ExecuteNonQuery();
+
+            }
+            else
+            {
+                cmd = new SqlCommand("insert into TblMemberPlan(memberid, fromtime, totime) VALUES (@memberid, @fromtime, @totime)", con);
+                cmd.Parameters.AddWithValue("@memberid", Convert.ToInt32(Request.QueryString["id"]));
+                cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
+                cmd.Parameters.AddWithValue("@totime", txtTo.Text);
                 cmd.ExecuteNonQuery();
             }
 

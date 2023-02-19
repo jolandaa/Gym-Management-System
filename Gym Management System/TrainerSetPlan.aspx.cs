@@ -41,7 +41,7 @@ namespace Gym_Management_System
 
                 con.Open();
 
-                cmd = new SqlCommand("select * from TblMembers where memberid = @id", con);
+                cmd = new SqlCommand("select * from TblMemberPlan where memberid = @id", con);
 
                 cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Request.QueryString["id"]));
 
@@ -74,9 +74,9 @@ namespace Gym_Management_System
             con.Open();
 
          
-            cmd = new SqlCommand("update TblMembers set mon=@mon,tues=@tues,wed=@wed,thu=@thu,fri=@fri,satu=@satu,sun=@sun where memberid = @id", con);
-            
-            
+            cmd = new SqlCommand("update TblMemberPlan set mon=@mon,tues=@tues,wed=@wed,thu=@thu,fri=@fri,satu=@satu,sun=@sun where memberid = @id", con);
+
+
             cmd.Parameters.AddWithValue("@mon", txtMon.Text);
             cmd.Parameters.AddWithValue("@tues", txtTues.Text);
             cmd.Parameters.AddWithValue("@wed", txtWed.Text);

@@ -75,7 +75,7 @@ namespace Gym_Management_System
                 {
                    
 
-                    cmd = new SqlCommand("insert into TblMembers(name, address, contactno, gender, dob, email, city, state, month, onemonthfee, totalfee, receivedfee, password, fromtime, totime, doj, expiredate) VALUES (@name, @address, @contactno, @gender, @dob, @email, @city, @state, @month, @onemonthfee, @totalfee, @receivedfee, @password, @fromtime, @totime, @doj, @expiredate)", con);
+                    cmd = new SqlCommand("insert into TblMembers(name, address, contactno, gender, dob, email, city, state, month, onemonthfee, totalfee, receivedfee, password, doj, expiredate) VALUES (@name, @address, @contactno, @gender, @dob, @email, @city, @state, @month, @onemonthfee, @totalfee, @receivedfee, @password, @doj, @expiredate)", con);
                     
 
                 //   cmd = new SqlCommand("insert into TblMembers(name, address, contactno, gender, email, city, state, height, weight, month, onemonthfee, totalfee, receivedfee, password, fromtime, totime) VALUES (@name, @address, @contactno, @gender, @email, @city, @state, @height, @weight, @month, @onemonthfee, @totalfee, @receivedfee, @password, @fromtime, @totime)", con);
@@ -95,8 +95,8 @@ namespace Gym_Management_System
                     cmd.Parameters.AddWithValue("@onemonthfee", Convert.ToInt32(txtOneMonthFee.Text));
                     cmd.Parameters.AddWithValue("@totalfee", Convert.ToInt32(txtTotalFee.Text));
                     cmd.Parameters.AddWithValue("@receivedfee", Convert.ToInt32(txtReceivedFee.Text));
-                    cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
-                    cmd.Parameters.AddWithValue("@totime", txtTo.Text);
+                    //cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
+                    //cmd.Parameters.AddWithValue("@totime", txtTo.Text);
                     cmd.Parameters.AddWithValue("@doj", DateTime.Now.Date.ToShortDateString());
                     cmd.Parameters.AddWithValue("@expiredate", DateTime.Now.Date.AddMonths(Convert.ToInt32(txtMonth.Text)).ToShortDateString());
                     cmd.Parameters.AddWithValue("@password", encryption(txtPass.Text));
@@ -107,7 +107,7 @@ namespace Gym_Management_System
                 cmd = new SqlCommand("SELECT * FROM TblMembers");
 
 
-                SqlDataAdapter da4 = new SqlDataAdapter("SELECT * FROM TblMembers", con);
+                SqlDataAdapter da4 = new SqlDataAdapter("SELECT * FROM TblMembers ORDER BY memberid DESC", con);
 
                 DataTable dt4 = new DataTable();
 
@@ -115,12 +115,21 @@ namespace Gym_Management_System
 
                 int lastId = Convert.ToInt32(dt4.Rows[0]["memberid"]);
 
+                Console.WriteLine(lastId);
+
 
                 cmd = new SqlCommand("insert into TblMeasurements(memberid, height, weight, BMI) VALUES (@memberid, @height, @weight, @BMI)", con);
                 cmd.Parameters.AddWithValue("@memberid", lastId);
                 cmd.Parameters.AddWithValue("@height", Convert.ToInt32(txtHeight.Text));
                 cmd.Parameters.AddWithValue("@weight", Convert.ToInt32(txtWeight.Text));
                 cmd.Parameters.AddWithValue("@BMI", Convert.ToInt32(txtBMI.Text));
+                cmd.ExecuteNonQuery();
+
+
+                cmd = new SqlCommand("insert into TblMemberPlan(memberid, fromtime, totime) VALUES (@memberid, @fromtime, @totime)", con);
+                cmd.Parameters.AddWithValue("@memberid", lastId);
+                cmd.Parameters.AddWithValue("@fromtime", txtFrom.Text);
+                cmd.Parameters.AddWithValue("@totime", txtTo.Text);
                 cmd.ExecuteNonQuery();
 
                 con.Close();

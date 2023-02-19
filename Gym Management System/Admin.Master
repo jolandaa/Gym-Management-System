@@ -32,27 +32,6 @@
           </li>
 
           <li class="nav-item ">
-            <a class="nav-link" href="AdminAddMembers.aspx">
-              <i class="material-icons">person_add</i>
-              <p>Add New Member</p>
-            </a>
-          </li>
-
-         <li class="nav-item ">
-            <a class="nav-link" href="AdminAddTrainers.aspx">
-              <i class="material-icons">person_add</i>
-              <p>Add New Trainer</p>
-            </a>
-          </li>
-
-          <li class="nav-item ">
-            <a class="nav-link" href="AdminAllocateTrainer.aspx">
-              <i class="material-icons">event_available</i>
-              <p>Allocate Trainer</p>
-            </a>
-          </li>
-
-          <li class="nav-item ">
             <a class="nav-link" href="AdminViewAllocation.aspx">
               <i class="material-icons">event_note</i>
               <p>View Allocation</p>

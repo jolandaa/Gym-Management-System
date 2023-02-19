@@ -42,7 +42,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Member List</a>
+            <a class="navbar-brand" href="#">Member List</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -56,16 +56,27 @@
       <!-- End Navbar -->
       <div class="content">
           <div class="row gx-3 gy-2 align-items-center">
-               <div class="form-group">
-                    <label class="bmd-label-floating">Name <asp:RequiredFieldValidator ID="SearchMemberInput" runat="server" ErrorMessage="*" ControlToValidate="txtName" ForeColor="Red"></asp:RequiredFieldValidator></label>
-                    <asp:TextBox ID="txtName" runat="server" class="form-control"></asp:TextBox>
-                        
-                </div>
-  
-              <div class="col-auto">
-                    <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary pull-left" OnClick="btnSearch_Click" />
+              <div class="col">
+                <a class="nav-link" href="AdminAddMembers.aspx">
+                    <p>Add New Member</p>
+                </a>
               </div>
-           </div>
+              <div class="col">
+                <div class="d-flex gx-3 gy-2 align-items-center justify-content-end">
+                   <div class="form-group">
+                        <label class="bmd-label-floating">Name <asp:RequiredFieldValidator ID="SearchMemberInput" runat="server" ErrorMessage="*" ControlToValidate="txtName" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                        <asp:TextBox ID="txtName" runat="server" class="form-control"></asp:TextBox>
+                        
+                    </div>
+  
+                  <div class="col-auto">
+                        <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary pull-left" OnClick="btnSearch_Click" />
+                  </div>
+               </div>
+              </div>
+          </div>
+
+
 
         <div class="container-fluid">
           <div class="row">

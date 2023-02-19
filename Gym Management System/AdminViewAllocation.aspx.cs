@@ -30,7 +30,7 @@ namespace Gym_Management_System
         {
             con.Open();
 
-            SqlDataAdapter da = new SqlDataAdapter("select TblTrainers.email as temail,TblTrainers.trainerid, TblMembers.email as memail,TblMembers.memberid from TblTrainerAllocation left join TblTrainers on TblTrainers.trainerid = TblTrainerAllocation.trainerid left join TblMembers on TblMembers.memberid = TblTrainerAllocation.memberid", con);
+            SqlDataAdapter da = new SqlDataAdapter("select * from TrainersMembersAllocationList", con);
 
             DataTable dt = new DataTable();
 

@@ -46,21 +46,44 @@ namespace Gym_Management_System
 
             da.Fill(dt);
 
+
+           
+
             if (dt.Rows.Count >= 1)
             {
                 Response.Write("<script>alert('Already Allocated..')</script>");
             }
             else
             {
-                cmd = new SqlCommand("insert into TblTrainerAllocation (trainerid,memberid) values (@traineremail,@memberemail)", con);
 
-                cmd.Parameters.AddWithValue("@traineremail", DropDownTrainer.SelectedValue);
+                cmd = new SqlCommand("select * from TblTrainerAllocation where memberid = @memberemail", con);
 
                 cmd.Parameters.AddWithValue("@memberemail", DropDownMember.SelectedValue);
-
                 cmd.ExecuteNonQuery();
 
-                Response.Write("<script>alert('Allocation Successfully..')</script>");
+                SqlDataAdapter da1 = new SqlDataAdapter(cmd);
+
+                DataTable dt1 = new DataTable();
+
+                da1.Fill(dt1);
+
+                if(dt1.Rows.Count >= 1)
+                {
+                    Response.Write("<script>alert('This member is Already Allocated..')</script>");
+                } else
+                {
+                    cmd = new SqlCommand("insert into TblTrainerAllocation (trainerid,memberid) values (@traineremail,@memberemail)", con);
+
+                    cmd.Parameters.AddWithValue("@traineremail", DropDownTrainer.SelectedValue);
+
+                    cmd.Parameters.AddWithValue("@memberemail", DropDownMember.SelectedValue);
+
+                    cmd.ExecuteNonQuery();
+
+                    Response.Write("<script>alert('Allocation Successfully..')</script>");
+                }
+
+                
             }
 
             con.Close();

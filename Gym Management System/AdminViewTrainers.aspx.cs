@@ -42,5 +42,37 @@ namespace Gym_Management_System
 
             con.Close();
         }
+
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "FindTrainer";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (!string.IsNullOrEmpty(txtName.Text.Trim()))
+            {
+                SqlParameter parameter = new SqlParameter("@trainerName", txtName.Text);
+                cmd.Parameters.Add(parameter);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+
+                RepeaterDB.DataSource = rdr;
+
+                RepeaterDB.DataBind();
+
+                con.Close();
+            }
+
+
+
+
+
+
+        }
     }
 }

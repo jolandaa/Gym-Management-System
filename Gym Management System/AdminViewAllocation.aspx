@@ -42,7 +42,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Trainer Allocation List</a>
+            <a class="navbar-brand" href="#">Trainer Allocation List</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -55,6 +55,13 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
+       <div class="row gx-3 gy-2 align-items-center">
+            <div class="col">
+                <a class="nav-link" href="AdminAllocateTrainer.aspx">
+                    <p>Allocate Trainer</p>
+                </a>
+            </div>
+        </div>
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
@@ -68,12 +75,17 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                            Trainer Email ID
+                            Trainer Name
+                        </th>
+                        <th>
+                          Trainer Email ID
+                        </th>
+                       <th>
+                            Member Name
                         </th>
                         <th>
                           Member Email ID
                         </th>
-                       
                         <th>
                           Delete
                         </th>
@@ -89,10 +101,16 @@
                         <tr>
                          
                           <td>
-                            <%#Eval("temail") %>
+                            <%#Eval("TrainerName") %>
                           </td>
                           <td>
-                            <%#Eval("memail") %>
+                            <%#Eval("TrainerEmail") %>
+                          </td>
+                          <td>
+                            <%#Eval("MemberName") %>
+                          </td>
+                          <td>
+                            <%#Eval("MemberEmail") %>
                           </td>
                          
                         <td>

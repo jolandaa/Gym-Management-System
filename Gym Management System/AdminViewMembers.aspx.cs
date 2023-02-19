@@ -28,15 +28,16 @@ namespace Gym_Management_System
 
            if (Request.QueryString["type"] == "remaining")
            {
-               getUser("select *,CONVERT(VARCHAR(10), dob, 105) as d,(totalfee - receivedfee) as remainingfee from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND (totalfee - receivedfee) != 0");
-           }
-           else if(Request.QueryString["type"] == "expired")
+                // user RemainingMembership VIEW
+                getUser("select * from RemainingMembership");
+            }
+            else if(Request.QueryString["type"] == "expired")
            {
-               getUser("select *,CONVERT(VARCHAR(10), dob, 105) as d,(totalfee - receivedfee) as remainingfee from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND DATEDIFF(day,CONVERT(date, CONVERT(VARCHAR(10), getdate(), 103), 103),CONVERT(date, expiredate, 103)) <= 0");
+               getUser("select *,CONVERT(VARCHAR(10), dob, 105) as d,(totalfee - receivedfee) as remainingfee from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid AND DATEDIFF(day,CONVERT(date, CONVERT(VARCHAR(10), getdate(), 103), 103),CONVERT(date, expiredate, 103)) <= 0 INNER JOIN TblMemberPlan ON TblMembers.memberid = TblMemberPlan.memberid");
            }
            else
            {
-                getUser("select *,CONVERT(VARCHAR(10), dob, 105) as d,(totalfee - receivedfee) as remainingfee from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid");
+                getUser("select *,CONVERT(VARCHAR(10), dob, 105) as d,(totalfee - receivedfee) as remainingfee from TblMembers INNER JOIN TblMeasurements ON TblMembers.memberid = TblMeasurements.memberid INNER JOIN TblMemberPlan ON TblMembers.memberid = TblMemberPlan.memberid");
            }
 
 
