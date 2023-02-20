@@ -92,32 +92,32 @@
                             </asp:RadioButtonList>
                         </div>
                         <div class="form-group">
-                          <label class="bmd-label-floating">Salary<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="txtSalary" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                          <label class="bmd-label-floating">Salary</label>
                           <asp:TextBox ID="txtSalary" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
                        
                         </div>
                       
                       
                         <div class="form-group">
-                          <label class="bmd-label-floating">Date Of Birth<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" ControlToValidate="txtDob" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                          <label class="bmd-label-floating">Date Of Birth</label>
                           <asp:TextBox ID="txtDob" runat="server" class="form-control" TextMode="DateTime"></asp:TextBox>
                        
                         </div>
 
                         <div class="form-group">
-                          <label class="bmd-label-floating">City<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ControlToValidate="txtCity" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                          <label class="bmd-label-floating">City</label>
                           <asp:TextBox ID="txtCity" runat="server" class="form-control"></asp:TextBox>
                         
                         </div>
 
                         <div class="form-group">
-                          <label class="bmd-label-floating">State<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" ControlToValidate="txtState" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                          <label class="bmd-label-floating">State</label>
                           <asp:TextBox ID="txtState" runat="server" class="form-control"></asp:TextBox>
                         
                         </div>
 
                         <div class="form-group">
-                          <label class="bmd-label-floating">Address<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="txtAddress" ForeColor="Red"></asp:RequiredFieldValidator></label>
+                          <label class="bmd-label-floating">Address</label>
                           <asp:TextBox ID="txtAddress" runat="server" class="form-control" Rows="4" TextMode="MultiLine"></asp:TextBox>
                        
                         </div>
